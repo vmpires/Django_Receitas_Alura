@@ -7,26 +7,11 @@
         <img src="{% static 'img/core-img/hamburger.png' %}" alt="">
     </div>
 
-    <!-- Search Wrapper -->
-    <div class="search-wrapper">
-        <!-- Close Btn -->
-        <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
+    {% include 'partials/_busca.html' %}
 
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <form action="#" method="post">
-                        <input type="search" name="search" placeholder="O que está procurando...">
-                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'partials/_menu.html' %}
 
-    {% include 'partials/menu.html' %}
-
-        <!-- Receipe Post Search -->
+        <!-- Receipe Post Search
         <div class="receipe-post-search mb-80">
             <div class="container">
                 <form action="#" method="post">
@@ -44,14 +29,18 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div> -->
 
         <!-- Receipe Slider -->
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="receipe-slider owl-carousel">
-                        <img src="{% static 'img/bg-img/tomate_banner.jpg' %}">
+                    {% if receita.foto_receita == '' %}
+                        <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
+                    {% else %}
+                        <img src = "{{ receita.foto_receita.url }}", alt="">
+                    {% endif %}  
                     </div>
                 </div>
             </div>
@@ -70,7 +59,7 @@
                                 <h6>Preparo: {{ receita.tempo_preparo }} minutos</h6>
                                 <h6>Rendimento: {{ receita.rendimento }}</h6>
                                 <h6>Categoria: {{ receita.categoria }}</h6>
-                                <h6>Por: Pessoa</h6>
+                                <h6>Por: {{ receita.pessoa }}</h6>
                             </div>
                         </div>
                     </div>
@@ -96,5 +85,5 @@
                 </div>
                 <!-- Ingredientes -->
 
-        {% include 'partials/footer.html' %}
+        {% include 'partials/_footer.html' %}
         {% endblock %}
